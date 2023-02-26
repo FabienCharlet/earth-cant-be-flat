@@ -98,6 +98,7 @@ function init() {
 
 	let slidesDiv = document.getElementsByClassName("slide");
 	nbSlides = slidesDiv.length;
+	responsiveMenuOpened = false;
 
 	initMenuLinks();
 	computeDivHeights();
@@ -210,6 +211,11 @@ function scrollToSlide(nextSlide) {
 	  navMenu.getElementsByTagName("li")[i].setAttribute("class", (i == nextSlide ? "selected" : ""));
 	}
 
+	if (responsiveMenuOpened) {
+
+		responsiveMenuClick();
+	}
+
 	log('Slide changed to ' + nextSlide + ' at height ' + heights[nextSlide]);
 	currentSlide = nextSlide;
 
@@ -271,4 +277,15 @@ function launchScroll(down) {
 
     	log('Scrolled synchronously');
     });
+}
+
+function responsiveMenuClick() {
+  var x = document.getElementById("navDiv");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+	responsiveMenuOpened = true;
+  } else {
+    x.className = "topnav";
+	responsiveMenuOpened = false;
+  }
 }
